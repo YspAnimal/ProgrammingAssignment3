@@ -1,6 +1,6 @@
 #setwd("C:/RProjects/ProgrammingAssignment3")
-#outcome <- "heart failure"
-#num <- 1
+outcome <- "heart failure"
+num <- 10
 
 rankall <- function(outcome, num = "best") {
   setwd("C:/RProjects/ProgrammingAssignment3")
@@ -8,15 +8,15 @@ rankall <- function(outcome, num = "best") {
   outcometab <- data.frame(c(11, 17, 23), row.names = c("heart attack", "heart failure", "pneumonia"))
   if (!(outcome %in% row.names(outcometab))) stop("invalid outcome") 
   data <- data[c(2,7,as.numeric(outcometab[outcome,]))]
-  sortdata <- data[order(as.numeric(data[, 3]), as.character(data[, 2])), ]
+  sortdata <- data[order(as.numeric(data[, 3]), as.character(data[, 1])), ]
   spsortdata <- split(sortdata, sortdata$State)
 
   
   rankHospitals <- function(x, num) {
       if (num=="best") {
-        head(x, 1)
+        x[1, 1]
       } else if (num=="worst") {
-        tail(x, 1)
+        x[nrow(x), 1]
       } else {
         x[num, 1]
       }
